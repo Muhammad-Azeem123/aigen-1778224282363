@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="manifest" href="./manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello World App</title>
@@ -139,5 +140,14 @@
         // This line is technically redundant if CSS is well-defined but doesn't hurt.
         greetingTextElement.style.color = '#2c3e50'; 
     </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('./sw.js')
+          .then(function (reg) { console.log('[PWA] SW registered:', reg.scope); })
+          .catch(function (err) { console.warn('[PWA] SW registration failed:', err); });
+      });
+    }
+  </script>
 </body>
 </html>
